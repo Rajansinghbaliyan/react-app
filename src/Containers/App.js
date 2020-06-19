@@ -71,8 +71,6 @@ class App extends React.Component {
 
   render() {
 
-    let btnClass = '';
-
     let persons = null;
     if (this.state.showPerson) {
       persons = (
@@ -86,7 +84,6 @@ class App extends React.Component {
         </div>
 
       );
-      btnClass = classes.Red;
     } else {
       persons = null;
     }
@@ -98,24 +95,17 @@ class App extends React.Component {
        return null;
      }*/
 
-    const assignedClasses = [];
 
-    if (this.state.person.length <= 2)
-      assignedClasses.push(classes.red);
-
-    if (this.state.person.length <= 1)
-      assignedClasses.push(classes.bold);
 
     return (
       <div className={classes.App}>
-          
-          <Cockpit 
-          assignedClasses = {assignedClasses}
-          btnClass = {btnClass}
-          persons = {persons}
+
+        <Cockpit
+          state={this.state}
+          persons={persons}
           clickedToggel={this.toggelShowPerson}
           clickedSwitch={this.switchNameHandler}
-          />       
+        />
       </div>
 
     );
