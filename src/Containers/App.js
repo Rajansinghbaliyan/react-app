@@ -3,6 +3,7 @@ import classes from './App.module.css';
 //import Person from '../Components/Persons/Person/Person';
 //import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
 
 class App extends React.Component {
   state = {
@@ -107,27 +108,14 @@ class App extends React.Component {
 
     return (
       <div className={classes.App}>
-
-        <p className={assignedClasses.join(' ')}>The complete React app</p>
-
-        <button
-          className={btnClass}
-          onClick={() => this.switchNameHandler('James Bond!')}
-          key='1'
-        >Switch Name</button>
-
-        <button
-          className={btnClass}
-          onClick={this.toggelShowPerson}
-          key='2'
-        >
-          Show Content
-        </button>
-
-        <div>
-          {persons}
-        </div>
-
+          
+          <Cockpit 
+          assignedClasses = {assignedClasses}
+          btnClass = {btnClass}
+          persons = {persons}
+          clickedToggel={this.toggelShowPerson}
+          clickedSwitch={this.switchNameHandler}
+          />       
       </div>
 
     );
