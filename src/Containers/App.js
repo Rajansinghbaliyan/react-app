@@ -74,15 +74,11 @@ class App extends React.Component {
     let persons = null;
     if (this.state.showPerson) {
       persons = (
-        <div>
-          <Persons
-            personArray={this.state.person}
-            click={this.deleteNameHandler}
-            nameChange={this.nameChangedHandler}//.bind(this, person.id)}
-          />
-
-        </div>
-
+        <Persons
+          personArray={this.state.person}
+          click={this.deleteNameHandler}
+          nameChange={this.nameChangedHandler}//.bind(this, person.id)}
+        />
       );
     } else {
       persons = null;
