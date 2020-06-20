@@ -12,7 +12,7 @@ const Cockpit = props => {
         return () => {
             console.log('[Cockpit.js] Cleanup Work in useEffect'); //clean up work is done is there is any return
         };
-    }, [props.title]);  /* run when the creation and the updation of the props.title is done 
+    }, []);  /* run when the creation and the updation of the props.title is done 
                             if want to run only ones then pass the [] empty array.*/
     useEffect(()=>{
         console.log('[cockpit.js] 2nd useEffect');
@@ -26,20 +26,22 @@ const Cockpit = props => {
 
     const assignedClasses = [];
 
-    if (props.state.showPerson) {
+    if (props.showPerson) {
         btnClass = classes.Red;
     }
 
-    if (props.state.person.length <= 2)
+    if (props.personLength <= 2)
         assignedClasses.push(classes.red);
 
-    if (props.state.person.length <= 1)
+    if (props.personLength <= 1)
         assignedClasses.push(classes.bold);
 
 
 
     return (
+        
         <div className={classes.Cockpit}>
+            {console.log('[cockpit.js] rendering...')}
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>The complete React app</p>
 
@@ -65,4 +67,4 @@ const Cockpit = props => {
     );
 }
 
-export default Cockpit;
+export default React.memo(Cockpit);

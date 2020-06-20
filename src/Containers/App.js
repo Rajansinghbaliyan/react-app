@@ -4,6 +4,7 @@ import classes from './App.module.css';
 //import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 class App extends React.Component {
 
@@ -134,16 +135,17 @@ changeThevalue = () => {
 
 
     return (
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <Cockpit
           title={this.props.appTitle}
-          state={this.state}
+          personLength={this.state.person.length}
+          showPerson={this.state.showPerson}
           persons={persons}
           clickedToggel={this.toggelShowPerson}
           clickedSwitch={this.switchNameHandler}
         />
         <button style={classes.buttton} onClick={this.changeThevalue}>{this.state.msg}</button>
-      </div>
+      </WithClass>
 
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Person from './Person/Person'
 
-class Persons extends Component {
+class Persons extends Component { //could use PureComponent if we need to check all the props changed or not without the shouldComponentUpdate
 
     //static getDerivedStateFromProps(props, state) {
     //   console.log('[Persons.js] getDerivedStateFromProps');
