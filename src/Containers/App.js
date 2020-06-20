@@ -20,7 +20,8 @@ class App extends React.Component {
       { id: 4, name: "Jamie", age: 37 }
     ],
     otherState: "the other state",
-    showPerson: false
+    showPerson: false ,
+    msg: 'ButtonClicked 0'
   }
 
   switchNameHandler = (newName) => {
@@ -57,8 +58,6 @@ class App extends React.Component {
 
   }
 
-
-
   toggelShowPerson = () => {
     const doesShow = this.state.showPerson;
     this.setState({ showPerson: !doesShow });
@@ -74,12 +73,14 @@ class App extends React.Component {
   }
 
 
+
+
   static getDerivedStateFromProps(props, state) {
     console.log("[App.js] getDerivedStateFromProps is called");
     return state
   }
 
-  shouldComponentUpdate(){
+  shouldComponentUpdate(nextProps, nextState) {
     console.log('[App.js] shouldcomponentUpdate')
     return true
   }
@@ -88,9 +89,15 @@ class App extends React.Component {
     console.log('[App.js] componentDidMount');
   }
 
-  componentDidUpdate(){
+  componentDidUpdate(prevProps, prevState) {
     console.log('[App.js] componentDidUpdate')
   }
+  
+changeThevalue = () => {
+  let x = 0;
+  x++;
+  this.setState( {msg: 'ButtonClicked ' + x});
+}
 
 
 
@@ -100,6 +107,7 @@ class App extends React.Component {
     console.log('render is called');
 
     let persons = null;
+
     if (this.state.showPerson) {
       persons = (
         <Persons
@@ -108,8 +116,11 @@ class App extends React.Component {
           nameChange={this.nameChangedHandler}//.bind(this, person.id)}
         />
       );
+
+
     } else {
       persons = null;
+
     }
 
     /* let classes = () =>{
@@ -118,12 +129,12 @@ class App extends React.Component {
        else 
        return null;
      }*/
+     
 
 
 
     return (
       <div className={classes.App}>
-
         <Cockpit
           title={this.props.appTitle}
           state={this.state}
@@ -131,6 +142,7 @@ class App extends React.Component {
           clickedToggel={this.toggelShowPerson}
           clickedSwitch={this.switchNameHandler}
         />
+        <button style={classes.buttton} onClick={this.changeThevalue}>{this.state.msg}</button>
       </div>
 
     );
