@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './Person.module.css';
 
 
-const Person = props => {
+class Person extends Component {
+     render(){
 
     /*const rnd = Math.random();
      if (rnd > 0.7){
@@ -14,21 +15,22 @@ const Person = props => {
         <div
             className={classes.Person}
             key='1'>
-            <h5>Hello, My name is {props.name}.</h5>
-            <p>And I am {props.age} years old.</p>
+            <h5>Hello, My name is {this.props.name}.</h5>
+            <p>And I am {this.props.age} years old.</p>
             <input
-                id={props.id}
+                id={this.props.id}
                 type="text"
-                onChange={props.nameChange}
-                value={props.name}></input>
+                onChange={this.props.nameChange}
+                value={this.props.name}></input>
             <button
-                id={props.id}
-                onClick={props.click}
+                id={this.props.id}
+                onClick={this.props.click}
                 key='2'
             >Delete
             </button>
         </div>
     );
+}
 }
 
 

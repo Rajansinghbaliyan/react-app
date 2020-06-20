@@ -6,6 +6,12 @@ import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+  }
+
   state = {
     person: [
       { id: 1, name: "James", age: 28 },
@@ -52,6 +58,7 @@ class App extends React.Component {
   }
 
 
+
   toggelShowPerson = () => {
     const doesShow = this.state.showPerson;
     this.setState({ showPerson: !doesShow });
@@ -67,9 +74,30 @@ class App extends React.Component {
   }
 
 
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps is called");
+    return state
+  }
+
+  shouldComponentUpdate(){
+    console.log('[App.js] shouldcomponentUpdate')
+    return true
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+
+  componentDidUpdate(){
+    console.log('[App.js] componentDidUpdate')
+  }
+
+
+
 
 
   render() {
+    console.log('render is called');
 
     let persons = null;
     if (this.state.showPerson) {
@@ -97,6 +125,7 @@ class App extends React.Component {
       <div className={classes.App}>
 
         <Cockpit
+          title={this.props.appTitle}
           state={this.state}
           persons={persons}
           clickedToggel={this.toggelShowPerson}

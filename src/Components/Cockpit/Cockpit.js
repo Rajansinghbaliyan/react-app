@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 //import persons from '../Persons/Persons';
 import classes from './Cockpit.module.css';
 
-const cockpit = props => {
+const Cockpit = props => {
 
+    useEffect (()=>{
+        console.log('[cockpit.js] useEffect');
+        setTimeout(()=>{
+            alert('Saved to google cloud');
+        },1000);
+    }, [props.title] );
+ 
     let btnClass = '';
 
     const assignedClasses = [];
@@ -22,6 +29,7 @@ if (props.state.person.length <= 1)
 
     return (
     <div className={classes.Cockpit}>
+        <h1>{props.title}</h1>
     <p className={assignedClasses.join(' ')}>The complete React app</p>
 
     <button
@@ -46,4 +54,4 @@ if (props.state.person.length <= 1)
     );
 }
 
-export default cockpit;
+export default Cockpit;
