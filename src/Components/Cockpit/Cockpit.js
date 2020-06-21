@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 //import persons from '../Persons/Persons';
 import classes from './Cockpit.module.css';
+import AuthContext from '../../context/auth-context';
 
 const Cockpit = props => {
 
@@ -26,9 +27,9 @@ const Cockpit = props => {
         toggleButtonRef.current.click();
         return () => {
             console.log('[cockpit.js] 2nd useEffect CleanUp work');
-            
+
         }
-    },[])
+    }, [])
 
 
     let btnClass = '';
@@ -69,12 +70,15 @@ const Cockpit = props => {
                 Show Content
         </button>
 
-        <button 
-        className={btnClass}
-        onClick={props.isAuthenticated}
-        >
-            Log in
+            <AuthContext.Consumer>
+                {(context)=>(
+                    <button
+                        className={btnClass}
+                        onClick={context.login}
+                    >Log in
         </button>
+                )}
+            </AuthContext.Consumer>
 
             <div>
                 {props.persons}

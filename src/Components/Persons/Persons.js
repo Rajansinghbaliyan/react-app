@@ -10,7 +10,7 @@ class Persons extends PureComponent { //could use PureComponent if we need to ch
 
     /*shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
-        if (nextProps.personArray !== this.props.personArray || nextProps.isAuthenticated !== this.props.isAuthenticated) {
+        if (nextProps.personArray !== this.props.personArray{
             console.log('[Persons.js] nextProps is changed');
             return true;
         } else {
@@ -35,7 +35,8 @@ class Persons extends PureComponent { //could use PureComponent if we need to ch
     }
 
     render() {
-        console.log('[Persons.js] Rendering...')
+        console.log('[Persons.js] Rendering...');
+        //console.log(this.props);
         return (
             this.props.personArray.map((person, index) => {
                 return (
@@ -46,7 +47,6 @@ class Persons extends PureComponent { //could use PureComponent if we need to ch
                         age={person.age}
                         nameChange={this.props.nameChange.bind(this, person.id)}
                         click={this.props.click.bind(this, index)}
-                        isAuthenticated={this.props.isAuthenticated}
                     />
                 )
             })

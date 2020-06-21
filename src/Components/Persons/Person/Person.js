@@ -3,6 +3,7 @@ import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/withClassesFunction';
 //import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context';
 
 
 class Person extends Component {
@@ -28,7 +29,11 @@ class Person extends Component {
             <Aux
                 key='1'>
                 <h5>Hello, My name is {this.props.name}.</h5>
-                <h3>{this.props.isAuthenticated ? "Authenticated" : "Please! LogIn"}</h3>
+                <AuthContext.Consumer>
+                    {(context) => (
+                        <h3>{ context.authentication? "Authenticated" : "Please! LogIn"}</h3>
+                    )}
+                </AuthContext.Consumer>
                 <p>And I am {this.props.age} years old.</p>
                 <input
                     id={this.props.id}

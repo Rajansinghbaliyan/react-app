@@ -5,6 +5,7 @@ import classes from './App.module.css';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
 import WithClass from '../hoc/WithClass';
+import AuthContext from '../context/auth-context';
 
 class App extends React.Component {
 
@@ -125,7 +126,6 @@ render() {
         personArray={this.state.person}
         click={this.deleteNameHandler}
         nameChange={this.nameChangedHandler}//.bind(this, person.id)}
-        isAuthenticated={this.state.authentication}
       />
     );
 
@@ -147,6 +147,7 @@ render() {
 
   return (
     <WithClass classes={classes.App}>
+      <AuthContext.Provider value={{authentication: this.state.authentication , login: this.loginHandler}}>
       <Cockpit
         title={this.props.appTitle}
         personLength={this.state.person.length}
@@ -154,9 +155,10 @@ render() {
         persons={persons}
         clickedToggel={this.toggelShowPerson}
         clickedSwitch={this.switchNameHandler}
-        isAuthenticated={this.loginHandler}
+        //isAuthenticated={this.loginHandler}
       />
       <button style={classes.buttton} onClick={this.changeThevalue}>{this.state.msg}</button>
+      </AuthContext.Provider>
     </WithClass>
 
   );
