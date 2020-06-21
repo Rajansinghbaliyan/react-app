@@ -21,7 +21,7 @@ const Cockpit = props => {
     if want to run only ones then pass the [] empty array.*/
 
 
-    useEffect(() => {
+    useEffect(() => {   //run after every render cycle
         console.log('[cockpit.js] 2nd useEffect');
         toggleButtonRef.current.click();
         return () => {
@@ -67,6 +67,13 @@ const Cockpit = props => {
                 key='2'
             >
                 Show Content
+        </button>
+
+        <button 
+        className={btnClass}
+        onClick={props.isAuthenticated}
+        >
+            Log in
         </button>
 
             <div>

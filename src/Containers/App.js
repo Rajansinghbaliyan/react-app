@@ -23,7 +23,8 @@ class App extends React.Component {
     otherState: "the other state",
     showPerson: false,
     msg: 'ButtonClicked 0',
-    counter: 0
+    counter: 0,
+    authentication: false
   }
 
   switchNameHandler = (newName) => {
@@ -61,6 +62,10 @@ class App extends React.Component {
       }
   });
 
+}
+
+loginHandler = () =>{
+  this.setState({authentication: true});
 }
 
 toggelShowPerson = () => {
@@ -120,6 +125,7 @@ render() {
         personArray={this.state.person}
         click={this.deleteNameHandler}
         nameChange={this.nameChangedHandler}//.bind(this, person.id)}
+        isAuthenticated={this.state.authentication}
       />
     );
 
@@ -148,6 +154,7 @@ render() {
         persons={persons}
         clickedToggel={this.toggelShowPerson}
         clickedSwitch={this.switchNameHandler}
+        isAuthenticated={this.loginHandler}
       />
       <button style={classes.buttton} onClick={this.changeThevalue}>{this.state.msg}</button>
     </WithClass>

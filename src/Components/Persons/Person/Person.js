@@ -7,7 +7,7 @@ import withClass from '../../../hoc/withClassesFunction';
 
 class Person extends Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.inputElement = React.createRef();
     }
@@ -28,6 +28,7 @@ class Person extends Component {
             <Aux
                 key='1'>
                 <h5>Hello, My name is {this.props.name}.</h5>
+                <h3>{this.props.isAuthenticated ? "Authenticated" : "Please! LogIn"}</h3>
                 <p>And I am {this.props.age} years old.</p>
                 <input
                     id={this.props.id}
@@ -56,4 +57,4 @@ class Person extends Component {
 //};
 
 
-export default withClass(Person,classes.Person);
+export default withClass(Person, classes.Person);
