@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 //import persons from '../Persons/Persons';
 import classes from './Cockpit.module.css';
 
 const Cockpit = props => {
+
+
+    const toggleButtonRef = useRef(null);
 
     useEffect(() => {
         console.log('[cockpit.js] useEffect');
@@ -12,14 +15,20 @@ const Cockpit = props => {
         return () => {
             console.log('[Cockpit.js] Cleanup Work in useEffect'); //clean up work is done is there is any return
         };
-    }, []);  /* run when the creation and the updation of the props.title is done 
-                            if want to run only ones then pass the [] empty array.*/
-    useEffect(()=>{
+    }, []);
+
+    /* run when the creation and the updation of the props.title is done 
+    if want to run only ones then pass the [] empty array.*/
+
+
+    useEffect(() => {
         console.log('[cockpit.js] 2nd useEffect');
-        return ()=>{
-            console.log('[cockpit.js] 2nd useEffect CleanUp work')
+        toggleButtonRef.current.click();
+        return () => {
+            console.log('[cockpit.js] 2nd useEffect CleanUp work');
+            
         }
-    })
+    },[])
 
 
     let btnClass = '';
@@ -39,13 +48,14 @@ const Cockpit = props => {
 
 
     return (
-        
+
         <div className={classes.Cockpit}>
             {console.log('[cockpit.js] rendering...')}
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>The complete React app</p>
 
             <button
+                ref={toggleButtonRef}
                 className={btnClass}
                 onClick={() => props.clickedSwitch('James Bond!')}
                 key='1'

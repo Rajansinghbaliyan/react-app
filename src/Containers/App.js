@@ -21,8 +21,9 @@ class App extends React.Component {
       { id: 4, name: "Jamie", age: 37 }
     ],
     otherState: "the other state",
-    showPerson: false ,
-    msg: 'ButtonClicked 0'
+    showPerson: false,
+    msg: 'ButtonClicked 0',
+    counter: 0
   }
 
   switchNameHandler = (newName) => {
@@ -53,102 +54,106 @@ class App extends React.Component {
 
     newPerson[personIndex].name = event.target.value;
 
-    this.setState({
-      person: newPerson
-    })
+    this.setState((prevState, props) => {    //Should use this setstate when depending upon the previous state
+      return {
+        person: newPerson,
+        counter: prevState.counter +1   
+      }
+  });
 
-  }
+}
 
-  toggelShowPerson = () => {
-    const doesShow = this.state.showPerson;
-    this.setState({ showPerson: !doesShow });
-  }
+toggelShowPerson = () => {
+  const doesShow = this.state.showPerson;
+  this.setState({ showPerson: !doesShow });
+}
 
 
-  deleteNameHandler = (indexSelected) => {
-    let newPerson = [...this.state.person];         //to create the copy of the state.
-    newPerson.splice(indexSelected, 1);
-    this.setState({
-      person: newPerson
-    })
-  }
+deleteNameHandler = (indexSelected) => {
+  let newPerson = [...this.state.person];         //to create the copy of the state.
+  newPerson.splice(indexSelected, 1);
+  this.setState({
+    person: newPerson
+    //
+  })
+}
 
 
 
 
   static getDerivedStateFromProps(props, state) {
-    console.log("[App.js] getDerivedStateFromProps is called");
-    return state
-  }
+  console.log("[App.js] getDerivedStateFromProps is called");
+  return state
+}
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[App.js] shouldcomponentUpdate')
-    return true
-  }
+shouldComponentUpdate(nextProps, nextState) {
+  console.log('[App.js] shouldcomponentUpdate')
+  return true
+}
 
-  componentDidMount() {
-    console.log('[App.js] componentDidMount');
-  }
+componentDidMount() {
+  console.log('[App.js] componentDidMount');
+}
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('[App.js] componentDidUpdate')
-  }
-  
+componentDidUpdate(prevProps, prevState) {
+  console.log('[App.js] componentDidUpdate')
+}
+
 changeThevalue = () => {
   let x = 0;
   x++;
-  this.setState( {msg: 'ButtonClicked ' + x});
+  this.setState({ msg: 'ButtonClicked ' + x });
 }
 
 
 
 
 
-  render() {
-    console.log('render is called');
+render() {
+  console.log('render is called');
 
-    let persons = null;
+  let persons = null;
 
-    if (this.state.showPerson) {
-      persons = (
-        <Persons
-          personArray={this.state.person}
-          click={this.deleteNameHandler}
-          nameChange={this.nameChangedHandler}//.bind(this, person.id)}
-        />
-      );
-
-
-    } else {
-      persons = null;
-
-    }
-
-    /* let classes = () =>{
-       if (this.state.person.length<=2) 
-       return ['red','bold'].join(" ");
-       else 
-       return null;
-     }*/
-     
-
-
-
-    return (
-      <WithClass classes={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          personLength={this.state.person.length}
-          showPerson={this.state.showPerson}
-          persons={persons}
-          clickedToggel={this.toggelShowPerson}
-          clickedSwitch={this.switchNameHandler}
-        />
-        <button style={classes.buttton} onClick={this.changeThevalue}>{this.state.msg}</button>
-      </WithClass>
-
+  if (this.state.showPerson) {
+    persons = (
+      <Persons
+        personArray={this.state.person}
+        click={this.deleteNameHandler}
+        nameChange={this.nameChangedHandler}//.bind(this, person.id)}
+      />
     );
+
+
+  } else {
+    persons = null;
+
   }
+
+  /* let classes = () =>{
+     if (this.state.person.length<=2) 
+     return ['red','bold'].join(" ");
+     else 
+     return null;
+   }*/
+
+
+
+
+  return (
+    <WithClass classes={classes.App}>
+      <Cockpit
+        title={this.props.appTitle}
+        personLength={this.state.person.length}
+        showPerson={this.state.showPerson}
+        persons={persons}
+        clickedToggel={this.toggelShowPerson}
+        clickedSwitch={this.switchNameHandler}
+      />
+      <button style={classes.buttton} onClick={this.changeThevalue}>{this.state.msg}</button>
+    </WithClass>
+
+  );
+}
 }
 
 export default App;
