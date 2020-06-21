@@ -13,9 +13,12 @@ class Person extends Component {
         this.inputElement = React.createRef();
     }
 
+    static contextType = AuthContext;
+
     componentDidMount() {
         //document.querySelector('input').focus();
         this.inputElement.current.focus();
+        console.log(this.context.authentication);
     }
     render() {
 
@@ -29,11 +32,18 @@ class Person extends Component {
             <Aux
                 key='1'>
                 <h5>Hello, My name is {this.props.name}.</h5>
+
+                <h3>{this.context.authentication ? "Authenticated" : "Login First"}</h3>
+
+                {/* older way of doing it
                 <AuthContext.Consumer>
                     {(context) => (
                         <h3>{ context.authentication? "Authenticated" : "Please! LogIn"}</h3>
                     )}
-                </AuthContext.Consumer>
+                </AuthContext.Consumer>*/}
+
+
+
                 <p>And I am {this.props.age} years old.</p>
                 <input
                     id={this.props.id}
